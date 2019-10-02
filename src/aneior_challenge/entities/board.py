@@ -16,11 +16,6 @@ class Board:
 
         self.movements = [(0, -1), (0, 1), (-1, 0), (1, 0)]
 
-#      self.movements = {"N": [(0, -1), (-1, 0), (1, 0)],
-#                          "S": [(0, 1), (-1, 0), (1, 0)],
-#                          "E": [(0, 1), (0, -1), (1, 0)],
-#                          "W": [(0, 1), (0, -1), (-1, 0)]}
-
     def is_correct_position(self, position: tuple):
         if position[0] < 0 or position[0] >= self.weight:
             return False

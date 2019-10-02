@@ -4,7 +4,27 @@ from src.aneior_challenge.entities.board import Board
 
 class Game:
 
-    def __init__(self, board: Board, depth: int, snake: Snake):
+    @staticmethod
+    def count_paths(board: Board, depth: int, snake: Snake):
+
+        def paths_recursive(_board, _snake, _depth):
+            snake_aux = _snake.pop()
+            positions = _board.get_position_neighbors(snake_aux.get_head_position())
+            moves = []
+
+            for pos in positions:
+                if not snake_aux.is_part_of_snake(pos):
+                    moves.append(pos)
+
+            if _depth == 1:
+                return len(moves)
+            else:
+                num_paths = 0
+                for mov in moves:
+                    snake_aux_2 = Snake(snake_aux.get_snake()).push(mov)
+                    num_paths += paths_recursive(_board, snake_aux_2, _depth - 1)
+
+            return num_paths
 
         if depth < 1:
             raise AttributeError('Depth value incorrect')
@@ -12,33 +32,5 @@ class Game:
         if not board.are_positions_correct(snake.get_snake()):
             raise AttributeError('Snake positions are incorrect')
 
-        self.board = board
-        self.depth = depth
-        self.snake = snake
-
-    def count_paths(self):
-
-        def paths_recursive(board, snake, depth):
-
-            if depth == 0:
-                return 1
-            else:
-                snake_aux = Snake(snake.get_snake())
-                snake_aux.pop()
-                positions = board.get_position_neighbors(snake_aux.get_head_position())
-                moves = []
-
-                for pos in positions:
-                    if not snake_aux.is_part_of_snake(pos):
-                        moves.append(pos)
-
-                num_paths = 0
-                for mov in moves:
-                    snake_aux2 = Snake(snake_aux.get_snake())
-                    snake_aux2.push(mov)
-                    num_paths += paths_recursive(board, snake_aux2, depth - 1)
-
-                return num_paths
-
-        return paths_recursive(self.board, self.snake, self.depth)
+        return paths_recursive(board, snake, depth)
 

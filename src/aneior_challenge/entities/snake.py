@@ -10,17 +10,13 @@ class Snake:
 
         self._is_correct_snake()
 
-    def move(self, position: array):
-
-        if position != self.get_head_position():
-            self.queue.pop(0)
-            self.queue.append(list(position))
-
     def pop(self):
         self.queue.pop(0)
+        return Snake(self.queue[::-1])
 
     def push(self, position):
         self.queue.append(list(position))
+        return Snake(self.queue[::-1])
 
     def get_head_position(self):
         return tuple(self.queue[-1])

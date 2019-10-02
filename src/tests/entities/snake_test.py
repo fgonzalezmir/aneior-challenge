@@ -19,21 +19,19 @@ class SnakeTest:
 
         assert snake.get_head_position() == (5, 0)
 
+        assert snake.pop().get_snake() == [[5, 0], [4, 0], [3, 0], [2, 0], [1, 0]]
+
+        assert snake.push((5, 1)).get_snake() == [[5, 1], [5, 0], [4, 0], [3, 0], [2, 0], [1, 0]]
+
     @staticmethod
     def test_part_of_snake():
         snake = Snake([[5, 0], [4, 0], [3, 0], [2, 0], [1, 0], [0, 0]])
         assert snake.is_part_of_snake([2, 0])
         assert not snake.is_part_of_snake([0, 1])
 
-    @staticmethod
-    def test_part_of_snake():
-        snake = Snake([[2, 2], [3, 2], [3, 1], [3, 0], [2, 0], [1, 0], [0, 0]])
-        snake.move((2, 1))
-        print(snake.get_snake())
-
 
 if __name__ == "__main__":
     SnakeTest.test_init_snake()
     SnakeTest.test_part_of_snake()
-    SnakeTest.test_part_of_snake()
+
 

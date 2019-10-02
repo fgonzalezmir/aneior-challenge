@@ -13,9 +13,7 @@ class GameTest:
         snake = Snake([[2, 2], [3, 2], [3, 1], [3, 0], [2, 0], [1, 0], [0, 0]])
         depth = 3
 
-        game = Game(board, depth, snake)
-
-        assert game.count_paths() == 7
+        assert Game.count_paths(board, depth, snake) == 7
 
     @staticmethod
     def test_games_2():
@@ -24,8 +22,7 @@ class GameTest:
         snake = Snake([[0, 2], [0, 1], [0, 0], [1, 0], [1, 1], [1, 2]])
         depth = 10
 
-        game = Game(board, depth, snake)
-        assert game.count_paths() == 1
+        assert Game.count_paths(board, depth, snake) == 1
 
     @staticmethod
     def test_games_3():
@@ -33,9 +30,7 @@ class GameTest:
         snake = Snake([[5, 5], [5, 4], [4, 4], [4, 5]])
         depth = 4
 
-        game = Game(board, depth, snake)
-
-        assert game.count_paths() == 81
+        assert Game.count_paths(board, depth, snake) == 81
 
 
 if __name__ == "__main__":
